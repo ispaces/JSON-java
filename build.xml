@@ -1,0 +1,56 @@
+<project default="build" basedir=".">
+
+  <target name="init">
+    <property name="src"     value="src" />
+    <property name="classes" value="classes" />
+    <property name="jarfile" value="org-json.jar"/>
+  </target>
+
+  <target name="compile" depends="init" description="compiles all the files">
+
+    <mkdir dir="${classes}"/>
+
+    <javac srcdir="." destdir="${classes}" debug="on" deprecation="${compile.deprecation}" encoding="8859_1">
+<!--
+    <javac srcdir="${src}" destdir="${classes}" debug="on" deprecation="${compile.deprecation}" encoding="8859_1">
+      <classpath>
+        <fileset dir="${webinflib}">
+          <include name="**/*.jar"/>
+        </fileset>
+        <fileset dir="e:\users\dermot\dev\ispaces\application-servers\client-libs">
+        <fileset dir="${basedir}\..\application-servers\client-libs">
+          <include name="**/*.jar"/>
+        </fileset>
+      </classpath>
+-->
+    </javac>
+  </target>
+
+  <target name="build" depends="init">
+
+    <antcall target="compile" />
+    <antcall target="buildjar" />
+
+  </target>
+
+  <target name="buildjar" depends="init">
+
+    <jar destfile="${jarfile}" basedir="${classes}">
+
+      <include name="org/json/**/*.class" />
+<!--
+      <include name="org/json/JSONArray.class" />
+      <include name="org/json/JSONException.class" />
+      <include name="org/json/JSONObject.class" />
+      <include name="org/json/JSONObject$Null.class" />
+      <include name="org/json/JSONString.class" />
+      <include name="org/json/JSONTokener.class" />
+      <manifest>
+        <attribute name="Implementation-Version" value="${svn.version}" />
+      </manifest>
+-->
+
+    </jar>
+  </target>
+
+</project>
