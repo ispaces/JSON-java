@@ -35,7 +35,15 @@
 
   <target name="buildjar" depends="init">
 
-    <jar destfile="${jarfile}" basedir="${classes}">
+    <manifest file="MANIFEST.MF">
+<!--
+      <attribute name="Implementation-Version" value="${version.number}" />
+      <attribute name="Trusted-Library" value="true" />
+-->
+      <attribute name="Built-By" value="${user.name}"/>
+    </manifest>
+
+    <jar destfile="${jarfile}" basedir="${classes}" manifest="MANIFEST.MF">
 
       <include name="org/json/**/*.class" />
 <!--
